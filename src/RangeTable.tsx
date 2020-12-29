@@ -61,7 +61,7 @@ export const COMBOS = RANGE_TABLE.reduce(
     list.concat(
       row.map(
         (hand, handIndex) =>
-          `${hand}${handIndex === index ? "" : handIndex < index ? "s" : "o"}`
+          `${hand}${handIndex === index ? "" : handIndex < index ? "o" : "s"}`
       )
     ),
   []
@@ -250,8 +250,8 @@ export function RangeTable() {
                   columnIndex === rowIndex
                     ? ""
                     : columnIndex < rowIndex
-                    ? "s"
-                    : "o";
+                    ? "o"
+                    : "s";
 
                 const combo = hand + suit;
 

@@ -1,3 +1,4 @@
+import produce from "immer";
 import React, {
   ChangeEvent,
   Fragment,
@@ -11,11 +12,10 @@ import {
   UnwrapRecoilValue,
   useRecoilCallback,
   useRecoilState,
-  useRecoilValue,
-  useResetRecoilState,
-  useSetRecoilState
+  useRecoilValue
 } from "recoil";
 import { getGroup, GROUPS, POSITIONS } from "./config";
+import { Dialog, useUpdateDialog } from "./Dialog";
 import { COMBOS, RangeTable } from "./RangeTable";
 import {
   actionsState,
@@ -24,7 +24,6 @@ import {
   allRangesState,
   comboState,
   configState,
-  groupsState,
   positionsState,
   positionState,
   rangesByPosition,
@@ -32,9 +31,11 @@ import {
   TransformResponse,
   weightState
 } from "./states";
-import { Dialog, useUpdateDialog } from "./Dialog";
 import "./styles.css";
-import produce from "immer";
+
+function Spacing() {
+  return <div className="Spacing" />;
+}
 
 function GroupManager() {
   const config = useRecoilValue(configState);
@@ -295,10 +296,6 @@ function SetRange() {
   return null;
 }
 
-function Spacing() {
-  return <div className="Spacing" />;
-}
-
 function ImportDialog() {
   const [config, setConfig] = useRecoilState(configState);
   const allRanges = useRecoilValue(allRangesState);
@@ -427,6 +424,7 @@ function ImportDialog() {
 
     reset();
 
+    // @ts-ignore
     const data = await file.text();
 
     workerRef.current?.postMessage({
