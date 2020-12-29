@@ -1,0 +1,269 @@
+:root {
+  --color-background: #131313;
+  --color-background-dark: #0b0b0b;
+  --color-background-darker: #000;
+  --color-background-light: #222;
+  --color-background-lighter: #444;
+  --color-foreground: #eee;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: "Inconsolata";
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
+
+.App {
+  padding: 12px;
+  display: flex;
+}
+
+.Column {
+  flex-shrink: 0;
+}
+
+.Sidebar {
+  border: 1px solid var(--color-background-lighter);
+  margin-left: 6px;
+  flex: 1;
+}
+
+.RangeTable {
+  user-select: none;
+  border-collapse: collapse;
+  border: 2px solid var(--color-background-dark);
+}
+
+.RangeCombo {
+  color: #000;
+  position: relative;
+  cursor: pointer;
+  padding: 0 4px;
+  background-color: var(--color-background-light);
+  border: 2px solid var(--color-background);
+  height: 50px;
+  width: 46px;
+  vertical-align: top;
+  text-align: left;
+  font-weight: bold;
+  overflow: hidden;
+}
+
+.RangeCombo-display {
+  position: relative;
+  font-weight: bolder;
+  font-size: 1rem;
+  z-index: 2;
+  margin-bottom: 2px;
+}
+
+.RangeCombo:not(.selected).suit-p {
+  background-color: var(--color-background);
+}
+
+.RangeCombo:hover {
+  /* background-color: var(--color-background-dark); */
+}
+
+.RangeCombo-background {
+  overflow: hidden;
+  pointer-events: none;
+  background-color: transparent;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.RangeCombo-background-group {
+  display: inline-block;
+  height: 100%;
+}
+
+.RangeCombo-weights {
+  position: relative;
+  font-weight: bolder;
+  font-size: 0.6rem;
+  z-index: 2;
+}
+
+.empty {
+  opacity: 0;
+}
+
+.Option-input {
+  position: absolute;
+  opacity: 0;
+  z-index: 1;
+}
+
+.Option-input:checked + .Option-label {
+  background-color: var(--color-background-lighter);
+}
+
+.Option-input:disabled + .Option-label {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.Option-label {
+  cursor: pointer;
+  display: inline-block;
+  margin: 4px;
+  background-color: var(--color-background-light);
+  border: 1px solid var(--color-background-lighter);
+  padding: 6px 12px;
+  user-select: none;
+}
+
+select {
+  padding: 4px 6px;
+  font-family: inherit;
+  background-color: transparent;
+  color: var(--color-foreground);
+}
+
+option {
+  background-color: var(--color-background);
+}
+
+.Dialog {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -30%);
+  background-color: var(--color-background);
+  z-index: 10;
+  border: 2px solid var(--color-background-dark);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.Dialog.opened {
+  transform: translate(-50%, -50%);
+  pointer-events: all;
+  opacity: 1;
+}
+
+.Dialog-overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 8;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+.Dialog.opened + .Dialog-overlay {
+  pointer-events: all;
+  opacity: 1;
+}
+
+.Dialog-header h2 {
+  margin: 0;
+  border-bottom: 1px solid var(--color-background-dark);
+  padding: 12px;
+}
+
+.Dialog-content {
+  padding: 12px;
+}
+
+.Dialog-footer {
+  padding: 12px;
+  text-align: right;
+  border-top: 1px solid var(--color-background-dark);
+}
+
+.Dialog-footer button {
+  margin-left: 6px;
+}
+
+hr {
+  margin: 12px 0;
+  border: none;
+  border-bottom: 1px solid #000;
+}
+
+.Spacing {
+  margin: 12px 0;
+}
+
+.Checkbox {
+  margin-right: 6px;
+  padding: 4px;
+  user-select: none;
+  vertical-align: middle;
+}
+
+.Checkbox input {
+  margin: 0;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+.Checkbox span {
+  vertical-align: middle;
+}
+
+button {
+  padding: 6px 12px;
+  background-color: #37474f;
+  border: 1px solid #546e7a;
+  color: var(--color-foreground);
+  font-family: inherit;
+  cursor: pointer;
+  font-weight: bolder;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+button.Button-secondary {
+  background-color: transparent;
+  border-color: var(--color-background-dark);
+}
+
+.Group-checkbox {
+  border-top: 6px solid transparent;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0 0 12px;
+}
+
+aside {
+  display: block;
+  border-bottom: 1px solid var(--color-background-lighter);
+  padding: 12px;
+}
+
+input[type="text"] {
+  background-color: transparent;
+  background-color: var(--color-background-dark);
+  font-family: inherit;
+  color: var(--color-foreground);
+  border: 1px solid var(--color-background-lighter);
+  padding: 6px 12px;
+  outline: none;
+}
+
+input[type="text"]:focus {
+  background-color: var(--color-background-darker);
+}
