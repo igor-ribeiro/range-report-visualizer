@@ -123,6 +123,7 @@ function RangeCombo({
 
         const type = button === 0 ? "add" : button === 2 ? "remove" : null;
 
+        // @ts-ignore
         timeoutRef.current = setTimeout(() => {
           setSelectionType(type);
         }, 80);
