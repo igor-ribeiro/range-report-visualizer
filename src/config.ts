@@ -3,8 +3,10 @@ export const GROUPS: Record<string, string> = {
   CHECK: "#2e7d32",
   FOLD: "#455a64",
   "BET 1": "#f44336",
-  "BET 2": "#d32f2f",
-  "BET 3": "#b71c1c"
+  "BET 2": "#c62828",
+  "BET 3": "#a61515",
+  "BET 4": "#8e0000",
+  "BET 5": "#5e0101"
 };
 
 export function getGroup(action: string): string {
@@ -20,16 +22,24 @@ export function getGroup(action: string): string {
     return "CALL";
   }
 
-  if (/raise/i.test(action)) {
+  if (/(raise|pfr)/i.test(action)) {
     return "BET 1";
   }
 
-  if (/(raise|2bet|pfr)/i.test(action)) {
+  if (/2bet/i.test(action)) {
     return "BET 2";
   }
 
-  if (/(3bet|4bet|5bet)/i.test(action)) {
+  if (/3bet/i.test(action)) {
     return "BET 3";
+  }
+
+  if (/4bet/i.test(action)) {
+    return "BET 4";
+  }
+
+  if (/5bet/i.test(action)) {
+    return "BET 5";
   }
 
   return "BET 1";
