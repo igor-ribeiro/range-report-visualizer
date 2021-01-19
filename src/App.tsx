@@ -134,11 +134,11 @@ function Importer() {
 
     setConfig(configParsed);
 
-    window.dispatchEvent(new CustomEvent("reset-ranges", {}));
+    dispatchEvent(new CustomEvent("reset", {}));
 
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        window.dispatchEvent(
+        dispatchEvent(
           new CustomEvent("apply-ranges", {
             detail: {
               data: configParsed.data
@@ -279,11 +279,20 @@ function SetRange() {
     ({ set, reset }) => (
       ranges: UnwrapRecoilValue<ReturnType<typeof rangesByPosition>>
     ) => {
+      const all: string[] = [];
+
+      for (const combo of COMBOS) {
+        reset(comboState(combo));
+      }
+
       for (const range of ranges) {
         const { hand, ...state } = range;
 
+        all.push(hand);
         set(comboState(hand), state);
       }
+
+      set(allRangesState, all);
     },
     []
   );
@@ -348,7 +357,7 @@ function ImportDialog() {
 
       reset(allRangesState);
     },
-    [allRanges]
+    [allRangesState]
   );
 
   const workerRef = useRef<null | Worker>(null);
@@ -391,10 +400,10 @@ function ImportDialog() {
     }
 
     // @ts-ignore
-    window.addEventListener("reset-ranges", onReset);
+    window.addEventListener("reset", onReset);
 
     // @ts-ignore
-    return () => window.removeEventListener("reset-ranges", onReset);
+    return () => window.removeEventListener("reset", onReset);
   }, [reset]);
 
   useEffect(() => {
